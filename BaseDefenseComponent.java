@@ -7,16 +7,16 @@ import javax.swing.KeyStroke;
 
 public class BaseDefenseComponent extends JComponent
 {
-    private ;
-    public void BaseDefenseComponent()
+    private Crosshair target;
+    public BaseDefenseComponent()
     {
+        this.target = new Crosshair();        
     }
     
     public void paintComponent(Graphics g)
     {
         Graphics2D g2 = (Graphics2D) g;
-        this.();
-        this.randomDude.draw(g2);
+        this.target.draw(g2);
     }
     class KeyStrokeListener implements KeyListener
     {
@@ -29,7 +29,7 @@ public class BaseDefenseComponent extends JComponent
             }
             else if (key.equals("RIGHT"))
             {
-                          
+                
             }
         }
 

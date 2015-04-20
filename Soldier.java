@@ -10,7 +10,7 @@ public class Soldier
     private int mobilityLevel = 2;
     private int damageLevel = 1;
     private String pngFileName = "soldier.png";
-    public void Soldier(String name)
+    public Soldier(String name)
     {
         soldierName = name;
     }

@@ -4,8 +4,10 @@ import java.awt.Graphics;
 
 public class Crosshair
 {
-    String image;
-    public void crosshair()
+    private String image;
+    private int x;
+    private int y;
+    public Crosshair()
     {
         image = "crosshair.png";
     }

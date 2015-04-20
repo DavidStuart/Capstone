@@ -6,7 +6,7 @@ public class Enemy
     private int mobilityLevel;
     private int damageLevel;
     private String type;
-    public void Enemy(String eType)
+    public Enemy(String eType)
     {
         if (eType.equals("Trooper") || eType.equals("Paratrooper"))
         {

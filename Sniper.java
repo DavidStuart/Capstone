@@ -6,7 +6,7 @@ public class Sniper extends Soldier
     private int mobilityLevel = 0;
     private int damageLevel = 8;
     private int MaxDamageLevel = 15;
-    public void Sniper(String name)
+    public Sniper(String name)
     {
         sniperName = name;
     }

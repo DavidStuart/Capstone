@@ -5,7 +5,7 @@ import javax.swing.ImageIcon;
 public class Base
 {
     private boolean baseDestroyed;
-    public void Base()
+    public Base()
     {
         baseDestroyed = false;
     }
