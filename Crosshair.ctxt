@@ -1,8 +1,8 @@
 #BlueJ class context
-comment0.params=
-comment0.target=Crosshair()
+comment0.params=startX\ startY
+comment0.target=Crosshair(int,\ int)
 comment1.params=g
 comment1.target=void\ draw(java.awt.Graphics)
-comment2.params=
-comment2.target=void\ moveLeft()
+comment2.params=mouseX\ mouseY
+comment2.target=void\ setPos(int,\ int)
 numComments=3

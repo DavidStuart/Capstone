@@ -13,6 +13,7 @@ public class BaseDefenseViewer
         BaseDefenseComponent component = new BaseDefenseComponent();
         frame.add(component);
         
+        
         frame.setVisible(true);
     }
     
