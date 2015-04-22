@@ -1,6 +1,6 @@
-import java.awt.Graphics;
-import java.awt.Graphics2D;
-import javax.swing.JComponent;
+import java.awt.*;
+import java.awt.image.*;
+import javax.swing.*;
 import java.awt.event.KeyListener;
 import java.awt.event.KeyEvent;
 import javax.swing.KeyStroke;
@@ -16,12 +16,21 @@ public class BaseDefenseComponent extends JComponent
         this.target = new Crosshair(600,400);        
         this.addMouseListener(new MouseClicker());
         this.addMouseMotionListener(new MouseMovementListener());
+        
+        BufferedImage cursorImg = new BufferedImage(16, 16, BufferedImage.TYPE_INT_ARGB);
+        Cursor blankCursor = Toolkit.getDefaultToolkit().createCustomCursor(
+        cursorImg, new Point(0, 0), "blank cursor");
+        this.setCursor(blankCursor);
     }
     
     public void paintComponent(Graphics g)
     {
         Graphics2D g2 = (Graphics2D) g;
         this.target.draw(g2);
+    }
+    public void spawnEnemy()
+    {
+        
     }
     class MouseClicker implements MouseListener
     {

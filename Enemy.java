@@ -1,3 +1,7 @@
+import javax.swing.ImageIcon;
+import java.awt.Image;
+import java.awt.Graphics;
+
 public class Enemy
 {
     private String soldierName;
@@ -5,6 +9,7 @@ public class Enemy
     private int accurateRange;
     private int mobilityLevel;
     private int damageLevel;
+    private String unitImage;
     private String type;
     public Enemy(String eType)
     {
@@ -15,6 +20,7 @@ public class Enemy
             this.accurateRange = 50;
             this.mobilityLevel = 1;
             this.damageLevel = 1;
+            this.unitImage = "Soldier.png";
         }
         else if (eType.equals("Armored"))
         {
@@ -34,9 +40,11 @@ public class Enemy
             int maxDamageLevel = 15;
         }
     }
-    
-    public void baseAttack()
+    public void baseAttack(){}
+    public void draw(Graphics g)
     {
-        
+        ImageIcon enemyImage = new ImageIcon(unitImage);
+        Image sprite = enemyImage.getImage();
+        g.drawImage(sprite,x,y, null);
     }
 }

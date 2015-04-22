@@ -16,8 +16,8 @@ public class Crosshair
     public void draw(Graphics g)
     {
         ImageIcon crossIcon = new ImageIcon(image);
-        Image imageThing = crossIcon.getImage();
-        g.drawImage(imageThing,x,y, null);
+        Image sprite = crossIcon.getImage();
+        g.drawImage(sprite,x,y, null);
     }
     public void setPos(int mouseX,int mouseY)
     {this.x = mouseX; this.y = mouseY;}
