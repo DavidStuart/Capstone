@@ -20,5 +20,5 @@ public class Crosshair
         g.drawImage(imageThing,x,y, null);
     }
     public void setPos(int mouseX,int mouseY)
-    {this.x = mouseX; this.x = mouseY;System.out.print("yes");}
+    {this.x = mouseX; this.y = mouseY;}
 }

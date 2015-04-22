@@ -36,7 +36,7 @@ public class BaseDefenseComponent extends JComponent
     {
         public void mouseDragged(MouseEvent e){}
         public void mouseMoved(MouseEvent e)
-        {target.setPos(e.getX(),e.getY());}
+        {target.setPos(e.getX(),e.getY());repaint();}
     }
     //class KeyStrokeListener implements KeyListener
     //{
