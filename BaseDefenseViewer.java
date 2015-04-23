@@ -9,6 +9,7 @@ public class BaseDefenseViewer
         frame.setSize(1200, 800);
         frame.setTitle("Base Defense");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setResizable(false);
         
         BaseDefenseComponent component = new BaseDefenseComponent();
         frame.add(component);

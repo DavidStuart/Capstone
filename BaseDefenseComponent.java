@@ -7,12 +7,19 @@ import javax.swing.KeyStroke;
 import java.awt.event.MouseMotionListener;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseEvent;
+import javax.swing.Timer;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
-public class BaseDefenseComponent extends JComponent
+public class BaseDefenseComponent extends JComponent implements ActionListener
 {
     private Crosshair target;
+    private Timer gameTimer = new Timer(17,this);
+    private int loopCounter = 0;
+    private Enemy[] enemies; 
     public BaseDefenseComponent()
     {
+        this.enemies = new Enemy[10];
         this.target = new Crosshair(600,400);        
         this.addMouseListener(new MouseClicker());
         this.addMouseMotionListener(new MouseMovementListener());
@@ -21,16 +28,28 @@ public class BaseDefenseComponent extends JComponent
         Cursor blankCursor = Toolkit.getDefaultToolkit().createCustomCursor(
         cursorImg, new Point(0, 0), "blank cursor");
         this.setCursor(blankCursor);
+        this.gameTimer.start();
     }
     
     public void paintComponent(Graphics g)
     {
         Graphics2D g2 = (Graphics2D) g;
         this.target.draw(g2);
-    }
-    public void spawnEnemy()
-    {
         
+    }
+    public void actionPerformed(ActionEvent e)
+    {
+        repaint();
+        loopCounter++;
+        if(loopCounter == 30)
+        {
+            enemies[enemies.length] = new Enemy("Trooper");
+            loopCounter = 0;
+        }
+        for (int i = 0;
+            i<enemies.length;
+            i++)
+        {enemies[i].move();}
     }
     class MouseClicker implements MouseListener
     {
@@ -45,7 +64,7 @@ public class BaseDefenseComponent extends JComponent
     {
         public void mouseDragged(MouseEvent e){}
         public void mouseMoved(MouseEvent e)
-        {target.setPos(e.getX(),e.getY());repaint();}
+        {target.setPos(e.getX(),e.getY());}
     }
     //class KeyStrokeListener implements KeyListener
     //{

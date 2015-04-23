@@ -11,8 +11,12 @@ public class Enemy
     private int damageLevel;
     private String unitImage;
     private String type;
+    private int x;
+    private int y;
     public Enemy(String eType)
     {
+        this.x = 500;
+        this.y = (int)((Math.random()*100)+100);
         if (eType.equals("Trooper") || eType.equals("Paratrooper"))
         {
             this.type = "Foot Unit";
@@ -45,6 +49,7 @@ public class Enemy
     {
         ImageIcon enemyImage = new ImageIcon(unitImage);
         Image sprite = enemyImage.getImage();
-        g.drawImage(sprite,x,y, null);
+        g.drawImage(sprite,this.x,this.y, null);
     }
+    public void move(){this.x+= 3;}
 }
