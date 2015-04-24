@@ -10,16 +10,16 @@ import java.awt.event.MouseEvent;
 import javax.swing.Timer;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.util.ArrayList;
 
 public class BaseDefenseComponent extends JComponent implements ActionListener
 {
     private Crosshair target;
     private Timer gameTimer = new Timer(17,this);
     private int loopCounter = 0;
-    private Enemy; 
+    private ArrayList<Enemy> enemies = new ArrayList<Enemy>(); 
     public BaseDefenseComponent()
     {
-        this.enemies = new Enemy[10];
         this.target = new Crosshair(600,400);        
         this.addMouseListener(new MouseClicker());
         this.addMouseMotionListener(new MouseMovementListener());
@@ -30,18 +30,24 @@ public class BaseDefenseComponent extends JComponent implements ActionListener
         this.setCursor(blankCursor);
         this.gameTimer.start();
     }
-
     public void paintComponent(Graphics g)
     {
         Graphics2D g2 = (Graphics2D) g;
-        this.target.draw(g2);
         
+        if(enemies.size()>0)
+        {
+            for(int i = 0;
+                i<enemies.size();
+                i++)
+            {enemies.get(i).draw(g2);}
+        }
+        this.target.draw(g2);
     }
     public void actionPerformed(ActionEvent e)
     {
         repaint();
         loopCounter++;
-        if(loopCounter == 10000)
+        if(loopCounter == 80)
         {
             enemies.add(enemies.size(),new Enemy("Trooper"));
             loopCounter = 0;
@@ -49,7 +55,7 @@ public class BaseDefenseComponent extends JComponent implements ActionListener
         for (int i = 0;
             i<enemies.size();
             i++)
-        {enemies.get(.move();}
+        {enemies.get(i).move();}
     }
     class MouseClicker implements MouseListener
     {

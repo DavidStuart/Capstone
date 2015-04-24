@@ -15,8 +15,8 @@ public class Enemy
     private int y;
     public Enemy(String eType)
     {
-        this.x = 500;
-        this.y = (int)((Math.random()*100)+100);
+        this.x = 1500;
+        this.y = (int)((Math.random()*100)+150);
         if (eType.equals("Trooper") || eType.equals("Paratrooper"))
         {
             this.type = "Foot Unit";
@@ -51,5 +51,5 @@ public class Enemy
         Image sprite = enemyImage.getImage();
         g.drawImage(sprite,this.x,this.y, null);
     }
-    public void move(){this.x+= 3;}
+    public void move(){this.x-= 3;}
 }

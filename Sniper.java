@@ -8,6 +8,6 @@ public class Sniper extends Soldier
     private int MaxDamageLevel = 15;
     public Sniper(String name)
     {
-        sniperName = name;
+        super(name);
     }
 }

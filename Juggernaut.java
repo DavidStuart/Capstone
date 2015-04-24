@@ -7,6 +7,6 @@ public class Juggernaut extends Soldier
     private int damageLevel = 2;
     public Juggernaut(String name)
     {
-        soldierName = name;
+        super(name);
     }
 }
