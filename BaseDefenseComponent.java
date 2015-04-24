@@ -16,7 +16,7 @@ public class BaseDefenseComponent extends JComponent implements ActionListener
     private Crosshair target;
     private Timer gameTimer = new Timer(17,this);
     private int loopCounter = 0;
-    private Enemy[] enemies; 
+    private Enemy; 
     public BaseDefenseComponent()
     {
         this.enemies = new Enemy[10];
@@ -30,7 +30,7 @@ public class BaseDefenseComponent extends JComponent implements ActionListener
         this.setCursor(blankCursor);
         this.gameTimer.start();
     }
-    
+
     public void paintComponent(Graphics g)
     {
         Graphics2D g2 = (Graphics2D) g;
@@ -41,15 +41,15 @@ public class BaseDefenseComponent extends JComponent implements ActionListener
     {
         repaint();
         loopCounter++;
-        if(loopCounter == 30)
+        if(loopCounter == 10000)
         {
-            enemies[enemies.length] = new Enemy("Trooper");
+            enemies.add(enemies.size(),new Enemy("Trooper"));
             loopCounter = 0;
         }
         for (int i = 0;
-            i<enemies.length;
+            i<enemies.size();
             i++)
-        {enemies[i].move();}
+        {enemies.get(.move();}
     }
     class MouseClicker implements MouseListener
     {
