@@ -21,4 +21,6 @@ public class Crosshair
     }
     public void setPos(int mouseX,int mouseY)
     {this.x = mouseX; this.y = mouseY;}
+    public int getX(){return this.x;}
+    public int getY(){return this.y;}
 }

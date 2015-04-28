@@ -30,6 +30,22 @@ public class BaseDefenseComponent extends JComponent implements ActionListener
         this.setCursor(blankCursor);
         this.gameTimer.start();
     }
+    public void shoot()
+    {
+        for(int i = 0;
+            i < enemies.size();
+            i++)
+        {
+            if(target.getX() + 12 > enemies.get(i).getX() && target.getX() + 12 < enemies.get(i).getX() + 20)
+            {
+                if(target.getY() + 12 > enemies.get(i).getY() && target.getY() + 12 < enemies.get(i).getY() + 20)
+                {
+                    enemies.get(i).killed();
+                    enemies.remove(i);
+                }
+            }
+        }
+    }
     public void paintComponent(Graphics g)
     {
         Graphics2D g2 = (Graphics2D) g;
@@ -60,7 +76,7 @@ public class BaseDefenseComponent extends JComponent implements ActionListener
     class MouseClicker implements MouseListener
     {
         public void mouseClicked(MouseEvent e)
-        {System.out.print("yes");}
+        {shoot();}
         public void mousePressed(MouseEvent e){}
         public void mouseReleased(MouseEvent e){}
         public void mouseEntered(MouseEvent e){}

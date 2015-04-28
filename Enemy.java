@@ -22,7 +22,7 @@ public class Enemy
             this.type = "Foot Unit";
             this.health = 3;
             this.accurateRange = 50;
-            this.mobilityLevel = 1;
+            this.mobilityLevel = 3;
             this.damageLevel = 1;
             this.unitImage = "Soldier.png";
         }
@@ -47,9 +47,15 @@ public class Enemy
     public void baseAttack(){}
     public void draw(Graphics g)
     {
-        ImageIcon enemyImage = new ImageIcon(unitImage);
-        Image sprite = enemyImage.getImage();
-        g.drawImage(sprite,this.x,this.y, null);
+        if(health != 0)
+        {
+            ImageIcon enemyImage = new ImageIcon(unitImage);
+            Image sprite = enemyImage.getImage();
+            g.drawImage(sprite,this.x,this.y, null);
+        }
     }
-    public void move(){this.x-= 3;}
+    public void move(){this.x-= mobilityLevel;}
+    public int getX(){return this.x;}
+    public int getY(){return this.y;}
+    public void killed(){this.health=0;}
 }
