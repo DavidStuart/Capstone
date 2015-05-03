@@ -2,7 +2,7 @@
 comment0.params=eType
 comment0.target=Enemy(java.lang.String)
 comment1.params=
-comment1.target=void\ baseAttack()
+comment1.target=void\ wounded()
 comment2.params=g
 comment2.target=void\ draw(java.awt.Graphics)
 comment3.params=

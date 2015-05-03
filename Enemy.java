@@ -11,20 +11,23 @@ public class Enemy
     private int damageLevel;
     private String unitImage;
     private String type;
+    private boolean wounded = false;
+    private String woundedImage;
     private int x;
     private int y;
     public Enemy(String eType)
     {
-        this.x = 1500;
-        this.y = (int)((Math.random()*100)+150);
+        this.x = 1200;
+        this.y = (int)((Math.random()*100)+580);
         if (eType.equals("Trooper") || eType.equals("Paratrooper"))
         {
             this.type = "Foot Unit";
             this.health = 3;
             this.accurateRange = 50;
-            this.mobilityLevel = 3;
+            this.mobilityLevel = 4;
             this.damageLevel = 1;
             this.unitImage = "Soldier.png";
+            this.woundedImage = "Soldier_wounded.png";
         }
         else if (eType.equals("Armored"))
         {
@@ -44,7 +47,8 @@ public class Enemy
             int maxDamageLevel = 15;
         }
     }
-    public void baseAttack(){}
+    
+    public void wounded(){this.wounded = true;this.unitImage = this.woundedImage;}
     public void draw(Graphics g)
     {
         if(health != 0)
@@ -54,7 +58,15 @@ public class Enemy
             g.drawImage(sprite,this.x,this.y, null);
         }
     }
-    public void move(){this.x-= mobilityLevel;}
+    
+    public void move()
+    {
+        if(this.wounded == false)
+        {this.x-= mobilityLevel;}
+        else
+        {this.x-= 1;}
+    }
+    
     public int getX(){return this.x;}
     public int getY(){return this.y;}
     public void killed(){this.health=0;}
