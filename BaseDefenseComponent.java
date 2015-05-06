@@ -14,14 +14,19 @@ import java.util.ArrayList;
 
 public class BaseDefenseComponent extends JComponent implements ActionListener
 {
-    private Crosshair target;
     private Timer gameTimer = new Timer(17,this);
+    
     private int loopCounter = 0;
     private int shotDelay = 0;
-    private ArrayList<Enemy> enemies = new ArrayList<Enemy>(); 
-    private Field background;
     private int killCount = 0;
     private int damageTaken = 0;
+    private int enemySpawnDelay = (int)(Math.random()*100)+1;
+    
+    private ArrayList<Enemy> enemies = new ArrayList<Enemy>();
+    private ArrayList<ScoreIcon> scoreIcons = new ArrayList<ScoreIcon>();
+    
+    private Crosshair target;
+    private Field background;
     private HPBar hp;
     private EndGameScreen egs;
     public BaseDefenseComponent()
@@ -30,6 +35,24 @@ public class BaseDefenseComponent extends JComponent implements ActionListener
         this.background = new Field();
         this.hp = new HPBar(50,50);
         this.egs = new EndGameScreen();
+        
+        int placementX = 1130;
+        int placementY = 10;
+
+         for(int i = 0;
+             i < 4;
+             i++)
+         {
+            for(int j = 0;
+                j < 10;
+                j++)
+            {    
+                scoreIcons.add(new ScoreIcon(placementX,placementY));
+                placementX-= 25;
+            }
+            placementX = 1130;
+            placementY+= 27;
+         }
         
         this.addMouseListener(new MouseClicker());
         this.addMouseMotionListener(new MouseMovementListener());
@@ -52,6 +75,7 @@ public class BaseDefenseComponent extends JComponent implements ActionListener
                 {
                     enemies.get(i).killed();
                     enemies.remove(i);
+                    scoreIcons.remove(scoreIcons.size()-1);
                     this.killCount++;
                 }
                 else if(target.getY() + 12 > enemies.get(i).getY()+22 && target.getY() + 12 < enemies.get(i).getY() + 40)
@@ -64,6 +88,10 @@ public class BaseDefenseComponent extends JComponent implements ActionListener
         Graphics2D g2 = (Graphics2D) g;
         this.background.draw(g2);
         this.hp.draw(g2);
+        for(int kc = 0;
+            kc < scoreIcons.size();
+            kc++)
+        {scoreIcons.get(kc).draw(g2);}
         if(killCount < 40 && damageTaken < 10)
         {
             if(enemies.size()>0)
@@ -86,24 +114,28 @@ public class BaseDefenseComponent extends JComponent implements ActionListener
     public void actionPerformed(ActionEvent e)
     {
         repaint();
-        loopCounter++;
-        shotDelay++;
-        if(loopCounter == 80 && enemies.size() < 13)
+        if(damageTaken < 10 && killCount < 40)
         {
-            enemies.add(enemies.size(),new Enemy("Trooper"));
-            loopCounter = 0;
-        }
-        for (int i = 0;
-            i<enemies.size();
-            i++)
-        {
-            enemies.get(i).move();
-            if(enemies.get(i).getX() < -40)
+            loopCounter++;
+            shotDelay++;
+            if(loopCounter == enemySpawnDelay && enemies.size() < 13)
             {
-                this.damageTaken++;
-                this.hp.setHPGauge(this.damageTaken);
-                enemies.remove(i);
-                i--;
+                enemies.add(enemies.size(),new Enemy("Trooper"));
+                loopCounter = 0;
+                enemySpawnDelay = (int)(Math.random()*100)+1;
+            }
+            for (int i = 0;
+                i<enemies.size();
+                i++)
+            {
+                enemies.get(i).move();
+                if(enemies.get(i).getX() < -40)
+                {
+                    this.damageTaken++;
+                    this.hp.setHPGauge(this.damageTaken);
+                    enemies.remove(i);
+                    i--;
+                }
             }
         }
     }
