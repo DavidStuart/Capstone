@@ -14,6 +14,7 @@ public class Soldier
     {
         soldierName = name;
     }
+    public int getDamage(){return this.damageLevel;}
     public void draw(Graphics g)
     {
         ImageIcon soldierIcon = new ImageIcon(pngFileName);

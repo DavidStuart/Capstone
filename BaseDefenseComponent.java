@@ -25,6 +25,9 @@ public class BaseDefenseComponent extends JComponent implements ActionListener
     private ArrayList<Enemy> enemies = new ArrayList<Enemy>();
     private ArrayList<ScoreIcon> scoreIcons = new ArrayList<ScoreIcon>();
     
+    private ArrayList<Soldier> troops = new ArrayList<Soldier>();
+    private int selectedTroop = 0;
+    
     private Crosshair target;
     private Field background;
     private HPBar hp;
@@ -35,6 +38,8 @@ public class BaseDefenseComponent extends JComponent implements ActionListener
         this.background = new Field();
         this.hp = new HPBar(50,50);
         this.egs = new EndGameScreen();
+        
+        this.troops.add(new Sniper("Jeff"));
         
         int placementX = 1130;
         int placementY = 10;
@@ -73,13 +78,24 @@ public class BaseDefenseComponent extends JComponent implements ActionListener
             {
                 if(target.getY() + 12 > enemies.get(i).getY() && target.getY() + 12 < enemies.get(i).getY() + 22)
                 {
-                    enemies.get(i).killed();
-                    enemies.remove(i);
-                    scoreIcons.remove(scoreIcons.size()-1);
-                    this.killCount++;
+                    enemies.get(i).shot(troops.get(selectedTroop).getDamage());
+                    if(enemies.get(i).getHP() <= 0)
+                    {    
+                        enemies.remove(i);
+                        scoreIcons.remove(scoreIcons.size()-1);
+                        this.killCount++;
+                    }
                 }
                 else if(target.getY() + 12 > enemies.get(i).getY()+22 && target.getY() + 12 < enemies.get(i).getY() + 40)
-                {enemies.get(i).wounded();}
+                {
+                    enemies.get(i).wounded(troops.get(selectedTroop).getDamage());
+                    if(enemies.get(i).getHP() <= 0)
+                    {    
+                        enemies.remove(i);
+                        scoreIcons.remove(scoreIcons.size()-1);
+                        this.killCount++;
+                    }
+                }
             }
         }
     }
@@ -116,11 +132,15 @@ public class BaseDefenseComponent extends JComponent implements ActionListener
         repaint();
         if(damageTaken < 10 && killCount < 40)
         {
+            double randomUnitType = Math.random();
             loopCounter++;
             shotDelay++;
             if(loopCounter == enemySpawnDelay && enemies.size() < 13)
             {
-                enemies.add(enemies.size(),new Enemy("Trooper"));
+                if(randomUnitType > .3)
+                {enemies.add(enemies.size(),new Enemy("Trooper"));}
+                else if(randomUnitType <= .3)
+                {enemies.add(enemies.size(),new Enemy("Armored"));}
                 loopCounter = 0;
                 enemySpawnDelay = (int)(Math.random()*100)+1;
             }

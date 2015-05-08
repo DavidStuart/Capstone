@@ -10,4 +10,5 @@ public class Sniper extends Soldier
     {
         super(name);
     }
+    public int getDamage(){return this.damageLevel;}
 }

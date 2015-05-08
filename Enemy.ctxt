@@ -1,8 +1,8 @@
 #BlueJ class context
 comment0.params=eType
 comment0.target=Enemy(java.lang.String)
-comment1.params=
-comment1.target=void\ wounded()
+comment1.params=damage
+comment1.target=void\ wounded(int)
 comment2.params=g
 comment2.target=void\ draw(java.awt.Graphics)
 comment3.params=
@@ -11,6 +11,8 @@ comment4.params=
 comment4.target=int\ getX()
 comment5.params=
 comment5.target=int\ getY()
-comment6.params=
-comment6.target=void\ killed()
-numComments=7
+comment6.params=damage
+comment6.target=void\ shot(int)
+comment7.params=
+comment7.target=int\ getHP()
+numComments=8

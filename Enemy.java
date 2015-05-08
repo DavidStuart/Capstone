@@ -22,7 +22,7 @@ public class Enemy
         if (eType.equals("Trooper") || eType.equals("Paratrooper"))
         {
             this.type = "Foot Unit";
-            this.health = 3;
+            this.health = 8;
             this.accurateRange = 50;
             this.mobilityLevel = 4;
             this.damageLevel = 1;
@@ -34,8 +34,10 @@ public class Enemy
             this.type = "Foot Unit";
             this.health = 12;
             this.accurateRange = 25;
-            this.mobilityLevel = 1;
+            this.mobilityLevel = 2;
             this.damageLevel = 2;
+            this.unitImage = "juggernaut.png";
+            this.woundedImage = "juggernaut_wounded.png";
         }
         else if (eType.equals("High accuracy Distance take out"))
         {
@@ -48,10 +50,15 @@ public class Enemy
         }
     }
     
-    public void wounded(){this.wounded = true;this.unitImage = this.woundedImage;}
+    public void wounded(int damage)
+    {
+        this.wounded = true;
+        this.unitImage = this.woundedImage;
+        this.health -= damage/2;
+    }
     public void draw(Graphics g)
     {
-        if(health != 0)
+        if(health > 0)
         {
             ImageIcon enemyImage = new ImageIcon(unitImage);
             Image sprite = enemyImage.getImage();
@@ -69,5 +76,6 @@ public class Enemy
     
     public int getX(){return this.x;}
     public int getY(){return this.y;}
-    public void killed(){this.health=0;}
+    public void shot(int damage){this.health -= damage;}
+    public int getHP(){return this.health;}
 }
