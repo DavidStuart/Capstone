@@ -28,14 +28,18 @@ public class BaseDefenseComponent extends JComponent implements ActionListener
     private ArrayList<Soldier> troops = new ArrayList<Soldier>();
     private int selectedTroop = 0;
     
-    private Crosshair target;
     private Field background;
+    private Tower sniperTower;
+    
+    private Crosshair target;
     private HPBar hp;
     private EndGameScreen egs;
     public BaseDefenseComponent()
     {
-        this.target = new Crosshair(600,400);
         this.background = new Field();
+        this.sniperTower = new Tower();
+        
+        this.target = new Crosshair(600,400);
         this.hp = new HPBar(50,50);
         this.egs = new EndGameScreen();
         
@@ -103,6 +107,8 @@ public class BaseDefenseComponent extends JComponent implements ActionListener
     {
         Graphics2D g2 = (Graphics2D) g;
         this.background.draw(g2);
+        this.sniperTower.draw(g2);
+        this.sniperTower.draw2(g2);
         this.hp.draw(g2);
         for(int kc = 0;
             kc < scoreIcons.size();
